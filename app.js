@@ -8,16 +8,16 @@ var app = express;
 app.set('view engine','ejs');
 
 //Renderiza e separa o HTML das páginas JS
-app.get('/tecnologia',function(req,res){
-    res.render("secao/tecnologia.ejs");
+app.get('/noticias',function(req,res){
+    res.render("noticias/noticias");
 });
 
-app.get('/moda',function(req,res){
-    res.send("<html><body>Moda Express</body></html>");
+app.get('/formulario_inclusao_noticia',function(req,res){
+    res.render("admin/form_add_noticia");
 });
 
 app.get('/',function(req,res){
-    res.send("<html><body>Testando</body></html>");
+    res.render("home/index.ejs");
 });
 
 app.listen(3000, function () {
