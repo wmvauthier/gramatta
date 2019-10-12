@@ -1,0 +1,27 @@
+{
+  "name": "gramatta",
+  "version": "1.0.0",
+  "description": "Sistema gramatta",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devlinkcne/gramatta.git"
+  },
+  "keywords": [
+    "gramatta"
+  ],
+  "author": "wesleymvauthier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devlinkcne/gramatta/issues"
+  },
+  "homepage": "https://github.com/devlinkcne/gramatta#readme",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1"
+  }
+}
