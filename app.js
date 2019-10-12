@@ -1,19 +1,12 @@
-//Arquivo Base para utilizar Express
-
-//Para "adicionar bibliotecas"
-var express = require('express')();
-var app = express;
-
-//O EJS que renderiza o HTML
-app.set('view engine','ejs');
+var app = require('./config/server.js')
 
 //Renderiza e separa o HTML das páginas JS
 app.get('/noticias',function(req,res){
-    res.render("noticias/noticias");
+    res.render("noticias/noticias.ejs");
 });
 
 app.get('/formulario_inclusao_noticia',function(req,res){
-    res.render("admin/form_add_noticia");
+    res.render("admin/form_add_noticia.ejs");
 });
 
 app.get('/',function(req,res){
