@@ -7,4 +7,7 @@ var app = express;
 //O EJS que renderiza o HTML
 app.set('view engine','ejs');
 
+//Aqui eu direciono o local onde eu procuro as Views
+app.set('views','./app/views')
+
 module.exports = app;
