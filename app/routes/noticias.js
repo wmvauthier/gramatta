@@ -1,11 +1,11 @@
-module.exports = function (app) {
+module.exports = function (application) {
 
-    app.get('/noticias', function (req, res) {
+    application.get('/noticias', function (req, res) {
 
-        var connection = app.config.dbConnection();
-        var noticiasModel = app.app.models.noticiasModel;
+        var connection = application.config.dbConnection();
+        var noticiasModel = new application.app.models.noticiasModel(connection);
 
-        noticiasModel.getNoticias(connection, function (error, result) {
+        noticiasModel.getNoticias(function (error, result) {
             res.render('noticias/noticias.ejs', { noticias: result });
         });
 
