@@ -1,14 +1,16 @@
 //Arquivo Base para utilizar Express e configurar o Server
 //Biblioteca do Express
-var express = require('express')();
-var app = express;
+var express = require('express')
+   , expressValidator = require('express-validator')
+   , app = express();
 
 //Um middleware 'body-parser' para poder tratar requisições GET e POST
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Um middleware 'express-validator' para validar campos
-var expressValidator = require('express-validator');
+//var expressValidator = require('express-validator');
+//app.use(expressValidator());
 app.use(expressValidator());
 
 //O tratador das diversas "Rotas" é o Consign
