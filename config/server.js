@@ -18,8 +18,9 @@ app.use(expressValidator());
 var consign = require('consign');
 consign()
     .include('app/routes')
-    .then('config/dbConnection.js')
     .then('app/models')
+    .then('app/controllers')
+    .then('config/dbConnection.js')
     .into(app);
 
 //O EJS que renderiza o HTML
