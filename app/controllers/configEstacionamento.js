@@ -5,7 +5,7 @@ module.exports.form_configEstacionamento = function (application, req, res) {
 
     configEstacionamentoModel.getConfigEstacionamento(function (error, result) {
         console.log(result);
-        res.render("config/configEstacionamento.ejs", { configEstacionamento : { result }, validacao : {} });
+        res.render("config/configEstacionamento.ejs", { configEstacionamento :  result , validacao : {} });
     });
 
 };
