@@ -13,6 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(expressValidator());
 app.use(expressValidator());
 
+//Um middleware do Express para a inserção de arquivos estáticos HTML, CSS ou JS
+app.use(express.static('./app/public'));
+
 //O tratador das diversas "Rotas" é o Consign
 //Com ele podemos adicionar diversos módulos automaticamente também
 var consign = require('consign');

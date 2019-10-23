@@ -7,7 +7,7 @@ module.exports.noticias_salvar = function (application, req, res) {
     var noticia = req.body;
 
     req.assert('titulo', 'Título é obrigatório').notEmpty();
-    req.assert('resumo', 'Resumno é obrigatório').notEmpty();
+    req.assert('resumo', 'Resumo é obrigatório').notEmpty();
     req.assert('resumo', 'Resumo entre 10 e 100').len(10, 100);
     req.assert('autor', 'Autor é obrigatório').notEmpty();
     req.assert('data_noticia', 'Data é obrigatório').notEmpty();
