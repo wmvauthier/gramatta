@@ -4,11 +4,33 @@ function ConfigEstacionamentoDAO(connection) {
 }
 
 ConfigEstacionamentoDAO.prototype.getConfigEstacionamento = function (callback) {
-    this._connection.query('select * from configEstacionamento where id_parking = 1', callback);
+    this._connection.query('SELECT * FROM configEstacionamento WHERE id_parking = 1', callback);
 };
 
 ConfigEstacionamentoDAO.prototype.setConfigEstacionamento = function (configEstacionamento, callback) {
-    this._connection.query('insert into noticias set ? ', noticia, callback);
+
+    let sql = `UPDATE configEstacionamento SET
+    nome_fantasia = ? ,
+    razao_social = ? ,
+    endereco = ? ,
+    cnpj = ? ,
+    inscricao_municipal = ? ,
+    telefone = ? ,
+    website = ? ,
+    email = ? 
+    WHERE id_parking = ?`;
+
+    let data = [configEstacionamento.nome_fantasia,
+    configEstacionamento.razao_social,
+    configEstacionamento.endereco,
+    configEstacionamento.cnpj,
+    configEstacionamento.inscricao_municipal,
+    configEstacionamento.telefone,
+    configEstacionamento.website,
+    configEstacionamento.email, 1];
+
+    this._connection.query(sql, data, callback);
+
 };
 
 module.exports = function () {

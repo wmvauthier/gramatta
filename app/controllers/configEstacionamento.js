@@ -1,38 +1,46 @@
 module.exports.form_configEstacionamento = function (application, req, res) {
+  var connection = application.config.dbConnection();
+  var configEstacionamentoModel = new application.app.models.ConfigEstacionamentoDAO(
+    connection
+  );
 
-    var connection = application.config.dbConnection();
-    var configEstacionamentoModel = new application.app.models.ConfigEstacionamentoDAO(connection);
-
-    configEstacionamentoModel.getConfigEstacionamento(function (error, result) {
-        console.log(result);
-        res.render("config/configEstacionamento.ejs", { configEstacionamento :  result , validacao : {} });
+  configEstacionamentoModel.getConfigEstacionamento(function (error, result) {
+    res.render("config/configEstacionamento.ejs", {
+      configEstacionamento: result,
+      success: {},
+      validacao: {}
     });
-
+  });
 };
 
-module.exports.configEstacionamento_save = function (application, req, res) {
+module.exports.form_configEstacionamento_save = function (application, req, res) {
 
-    /*var configEstacionamento = req.body;
+  var configEstacionamento = req.body;
 
-    req.assert('titulo', 'Título é obrigatório').notEmpty();
-    req.assert('resumo', 'Resumo é obrigatório').notEmpty();
-    req.assert('resumo', 'Resumo entre 10 e 100').len(10, 100);
-    req.assert('autor', 'Autor é obrigatório').notEmpty();
-    req.assert('data_noticia', 'Data é obrigatório').notEmpty();
-    req.assert('noticia', 'Título é obrigatório').notEmpty();
+  req.assert('nome_fantasia', 'O Nome Fantasia é obrigatório').notEmpty();
+  req.assert('cnpj', 'O CNPJ contém 18 números').len(18, 18);
+  req.assert('inscricao_municipal', 'A inscrição Municipal contém apenas números').isInt();
 
-    var erros = req.validationErrors();
+  var erros = req.validationErrors();
 
-    if (erros) {
-        res.render("admin/form_add_noticia.ejs", { validacao: erros, noticia: noticia });
-        return;
-    }
+  if (erros) {
+    console.log(configEstacionamento);
+    res.render("config/configEstacionamento.ejs", { validacao: erros, configEstacionamento: configEstacionamento, success: {} });
+    return;
+  }
 
-    var connection = application.config.dbConnection();
-    var noticiasModel = new application.app.models.NoticiasDAO(connection);
+  var connection = application.config.dbConnection();
+  var configEstacionamentoModel = new application.app.models.ConfigEstacionamentoDAO(
+    connection
+  );
 
-    noticiasModel.salvarNoticia(noticia, function (error, result) {
-        res.redirect('/noticias');
+  configEstacionamentoModel.setConfigEstacionamento(configEstacionamento, function (error, result) {
+    console.log(configEstacionamento);
+    res.render("config/configEstacionamento.ejs", {
+      configEstacionamento: configEstacionamento,
+      success: {},
+      validacao: {}
     });
-*/
-}
+  });
+
+};

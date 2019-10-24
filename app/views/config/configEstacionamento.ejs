@@ -1,105 +1,98 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8" />
 
-    <title>Portal de notícias</title>
+  <title>Portal de notícias</title>
 
-    <!-- JQuery -->
-    <script src="js/jquery-2.2.1.js"></script>
+  <!-- JQuery -->
+  <script src="js/jquery-2.2.1.js"></script>
 
-    <!-- bootstrap - link cdn -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- bootstrap - link cdn -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
 
-    <!-- incluindo css -->
-    <link href="css/style.css" rel="stylesheet">
+  <!-- incluindo css -->
+  <link href="css/style.css" rel="stylesheet" />
 
-    <!-- favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico" />
+  <!-- favicon -->
+  <link rel="shortcut icon" href="images/favicon.ico" />
 </head>
 
 <body>
-
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <img src="images/logo.png" />
-            </div>
-
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">HOME</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+  <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
-        <h1>A<%= configEstacionamento[0].nome_fantasia %></h1>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
 
-        <% if(validacao.length > 0) {%>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <strong>Atenção!</strong>
-                    <ul>
-                        <% for(var i = 0; i < validacao.length; i++) { %>
-                        <li><%= validacao[i].msg%></li>
-                        <% } %>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <%}%>
-        <div class="row">
-            <div class="col-md-12">
-                <form action="/noticias/salvar" method="POST">
-                    <div class="form-group">
-                        <label for="titulo">Nome Fantasia:</label>
-                        <input type="text" class="form-control" id="titulo" name="titulo">
-                    </div>
+        <img src="images/logo.png" />
+      </div>
 
-                    <div class="form-group">
-                        <label for="pwd">Razão Social:</label>
-                        <input type="text" class="form-control" id="resumo" name="resumo">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pwd">Endereço:</label>
-                        <input type="text" class="form-control" id="autor" name="autor">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pwd">CNPJ:</label>
-                        <input type="date" class="form-control" id="data_noticia" name="data_noticia">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="pwd">Inscrição Municipal:</label>
-                        <textarea class="form-control" id="noticia" name="noticia"></textarea>
-                    </div>
-
-
-                    <button type="submit" class="btn btn-default">Cadastrar</button>
-                </form>
-            </div>
-        </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/">HOME</a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
+  <h1><%= configEstacionamento[0].nome_fantasia %></h1>
+
+  <div class="container">
+    <% if(validacao.length > 0) {%>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-danger alert-dismissible fade show">
+          <strong>Atenção!</strong>
+          <ul>
+            <% for(var i = 0; i < validacao.length; i++) { %>
+            <li><%= validacao[i].msg%></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <%}%>
+    <% if(success.length > 0) {%>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-success alert-dismissible fade show">
+          <strong>Atenção!</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <ul>
+            <% for(var i = 0; i < success.length; i++) { %>
+            <li><%= success[i].msg%></li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <%}%>
+      <div class="row">
+        <div class="col-md-12">
+          <form action="/form_configEstacionamento/saveChanges" method="POST">
+
+            
+
+  <button type="submit" class="btn btn-default">Salvar</button>
+  </form>
+  </div>
+  </div>
+  </div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+    integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+    crossorigin="anonymous"></script>
 
 </body>
 
