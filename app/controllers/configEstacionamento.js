@@ -6,7 +6,7 @@ module.exports.form_configEstacionamento = function (application, req, res) {
 
   configEstacionamentoModel.getConfigEstacionamento(function (error, result) {
     res.render("config/configEstacionamento.ejs", {
-      configEstacionamento: result,
+      configEstacionamento: result[0],
       success: {},
       validacao: {}
     });
@@ -22,9 +22,9 @@ module.exports.form_configEstacionamento_save = function (application, req, res)
   req.assert('inscricao_municipal', 'A inscrição Municipal contém apenas números').isInt();
 
   var erros = req.validationErrors();
+  var success = [{ "msg": "Registro alterado com Sucesso" }];
 
   if (erros) {
-    console.log(configEstacionamento);
     res.render("config/configEstacionamento.ejs", { validacao: erros, configEstacionamento: configEstacionamento, success: {} });
     return;
   }
@@ -35,12 +35,7 @@ module.exports.form_configEstacionamento_save = function (application, req, res)
   );
 
   configEstacionamentoModel.setConfigEstacionamento(configEstacionamento, function (error, result) {
-    console.log(configEstacionamento);
-    res.render("config/configEstacionamento.ejs", {
-      configEstacionamento: configEstacionamento,
-      success: {},
-      validacao: {}
-    });
+    res.render("config/configEstacionamento.ejs", { validacao: erros, configEstacionamento: configEstacionamento, success: success });
   });
 
 };

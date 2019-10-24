@@ -44,13 +44,11 @@
     </div>
   </nav>
 
-  <h1><%= configEstacionamento[0].nome_fantasia %></h1>
-
   <div class="container">
     <% if(validacao.length > 0) {%>
     <div class="row">
       <div class="col-md-12">
-        <div class="alert alert-danger alert-dismissible fade show">
+        <div class="alert alert-danger">
           <strong>Atenção!</strong>
           <ul>
             <% for(var i = 0; i < validacao.length; i++) { %>
@@ -64,11 +62,8 @@
     <% if(success.length > 0) {%>
     <div class="row">
       <div class="col-md-12">
-        <div class="alert alert-success alert-dismissible fade show">
+        <div class="alert alert-success">
           <strong>Atenção!</strong>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
           <ul>
             <% for(var i = 0; i < success.length; i++) { %>
             <li><%= success[i].msg%></li>
@@ -78,16 +73,64 @@
       </div>
     </div>
     <%}%>
-      <div class="row">
-        <div class="col-md-12">
+
+    <div class="row">
+      <div class="col-md-12">
           <form action="/form_configEstacionamento/saveChanges" method="POST">
+              <div class="form-group">
+                  <label for="titulo">Nome Fantasia:</label>
+                  <input type="text" class="form-control" id="nome_fantasia" name="nome_fantasia"
+                  value = "<%= configEstacionamento.nome_fantasia %>">
+              </div>
 
-            
+              <div class="form-group">
+                  <label for="pwd">Razão Social:</label>
+                  <input type="text" class="form-control" id="razao_social" name="razao_social"
+                  value = "<%= configEstacionamento.razao_social %>">
+              </div>
 
-  <button type="submit" class="btn btn-default">Salvar</button>
-  </form>
-  </div>
-  </div>
+              <div class="form-group">
+                  <label for="pwd">Endereço:</label>
+                  <input type="text" class="form-control" id="endereco" name="endereco"
+                  value = "<%= configEstacionamento.endereco %>">
+              </div>
+
+              <div class="form-group">
+                  <label for="pwd">CNPJ:</label>
+                  <input type="text" class="form-control" id="cnpj" name="cnpj"
+                  value = "<%= configEstacionamento.cnpj %>">
+              </div>
+
+              <div class="form-group">
+                  <label for="pwd">Inscrição Municipal:</label>
+                  <input type="text" class="form-control" id="inscricao_municipal" name="inscricao_municipal"
+                  value = "<%= configEstacionamento.inscricao_municipal %>">
+              </div>
+
+              <div class="form-group">
+                <label for="pwd">Telefone:</label>
+                <input type="text" class="form-control" id="telefone" name="telefone"
+                  value = "<%= configEstacionamento.telefone %>">
+              </div>
+
+              <div class="form-group">
+                <label for="pwd">Website:</label>
+                <input type="text" class="form-control" id="website" name="website"
+                value = "<%= configEstacionamento.website %>">
+              </div>
+
+              <div class="form-group">
+                <label for="pwd">Email:</label>
+                <input type="text" class="form-control" id="email" name="email"
+                value = "<%= configEstacionamento.email %>">
+              </div>
+
+              <button type="submit" class="btn btn-default">Cadastrar</button>
+
+          </form>
+      </div>
+</div>
+
   </div>
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
