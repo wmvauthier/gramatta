@@ -12,6 +12,14 @@ module.exports.user = function (application, req, res) {
 
 }
 
+module.exports.form_insert_user = function (application, req, res) {
+    res.render('users/form_insert_user.ejs', { validacao: {} });
+}
+
+module.exports.form_update_user = function (application, req, res) {
+    res.render('users/form_update_user.ejs', { validacao: {} });
+}
+
 module.exports.users = function (application, req, res) {
 
     var connection = application.config.dbConnection();
