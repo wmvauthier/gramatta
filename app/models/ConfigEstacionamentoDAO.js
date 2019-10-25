@@ -7,7 +7,7 @@ ConfigEstacionamentoDAO.prototype.getConfigEstacionamento = function (callback) 
     this._connection.query('SELECT * FROM configEstacionamento WHERE id_parking = 1', callback);
 };
 
-ConfigEstacionamentoDAO.prototype.setConfigEstacionamento = function (configEstacionamento, callback) {
+ConfigEstacionamentoDAO.prototype.updateConfigEstacionamento = function (configEstacionamento, callback) {
 
     let sql = `UPDATE configEstacionamento SET
     nome_fantasia = ? ,

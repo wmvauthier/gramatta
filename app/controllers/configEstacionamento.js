@@ -34,7 +34,7 @@ module.exports.form_configEstacionamento_save = function (application, req, res)
     connection
   );
 
-  configEstacionamentoModel.setConfigEstacionamento(configEstacionamento, function (error, result) {
+  configEstacionamentoModel.updateConfigEstacionamento(configEstacionamento, function (error, result) {
     res.render("config/configEstacionamento.ejs", { validacao: erros, configEstacionamento: configEstacionamento, success: success });
   });
 
