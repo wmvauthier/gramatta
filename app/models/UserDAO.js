@@ -3,9 +3,9 @@ function UserDAO(connection) {
     this._connection = connection
 }
 
-UserDAO.prototype.getUser = function (user, callback) {
+UserDAO.prototype.getUser = function (id, callback) {
     let sql = `SELECT * FROM users WHERE id_user = ?`;
-    let data = [user];
+    let data = [id];
     this._connection.query(sql, data, callback);
 };
 
@@ -31,12 +31,29 @@ UserDAO.prototype.insertUser = function (user, callback) {
     this._connection.query(sql, data, callback);
 };
 
-UserDAO.prototype.updateUser = function (callback) {
-    this._connection.query('select * from noticias order by data_criacao desc limit 5', callback);
+UserDAO.prototype.updateUser = function (user, callback) {
+    let sql = `UPDATE users SET
+    nome = ? ,
+    cargo = ? ,
+    user_login = ? ,
+    user_senha = ? ,
+    nivel_acesso = ?
+    WHERE id_user = ?`;
+
+    let data = [user.nome,
+    user.cargo,
+    user.user_login,
+    user.user_senha,
+    user.nivel_acesso,
+    user.id_user];
+
+    this._connection.query(sql, data, callback);
 };
 
-UserDAO.prototype.deleteUser = function (callback) {
-    this._connection.query('select * from noticias order by data_criacao desc limit 5', callback);
+UserDAO.prototype.deleteUser = function (id, callback) {
+    let sql = `DELETE FROM users WHERE id_user = ?`;
+    let data = [id];
+    this._connection.query(sql, data, callback);
 };
 
 module.exports = function () {
