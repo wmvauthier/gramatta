@@ -1,8 +1,8 @@
 //Arquivo Base para utilizar Express e configurar o Server
 //Biblioteca do Express
 var express = require('express')
-   , expressValidator = require('express-validator')
-   , app = express();
+    , expressValidator = require('express-validator')
+    , app = express();
 
 //Um middleware 'body-parser' para poder tratar requisições GET e POST
 var bodyParser = require('body-parser');
@@ -30,6 +30,9 @@ consign()
 app.set('view engine', 'ejs');
 
 //Aqui eu direciono o local onde eu procuro as Views
-app.set('views', './app/views')
+app.set('views', './app/views');
+
+var person = require('./variables.js');
+console.log(person.firstName + ' ' + person.lastName);
 
 module.exports = app;

@@ -5,7 +5,7 @@ module.exports = function (application) {
     application.get('/user', function (req, res) {
         application.app.controllers.users.user(application, req, res);
     });
-    
+
     application.get('/users', function (req, res) {
         application.app.controllers.users.users(application, req, res);
     });
