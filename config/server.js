@@ -32,7 +32,4 @@ app.set('view engine', 'ejs');
 //Aqui eu direciono o local onde eu procuro as Views
 app.set('views', './app/views');
 
-var person = require('./variables.js');
-console.log(person.firstName + ' ' + person.lastName);
-
 module.exports = app;

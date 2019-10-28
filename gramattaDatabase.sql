@@ -7,7 +7,7 @@ CREATE DATABASE gramatta;
 USE gramatta;
 
 /* TABELA DE CONFIGURAÇÃO DA FILIAL DO CLIENTE */
-CREATE TABLE configEstacionamento(
+CREATE TABLE configParking(
     id_parking int not null primary key auto_increment,
     nome_fantasia varchar(100),
     razao_social varchar(100),
@@ -17,6 +17,25 @@ CREATE TABLE configEstacionamento(
     telefone varchar(18),
     website varchar(100),
     email varchar(100)
+);
+
+/* TABELA DE TABELA DE PREÇO */
+CREATE TABLE priceTable(
+    id_tabela_preco int not null primary key auto_increment,
+    nome varchar(100),
+    periodo int,
+    valor float,
+    tabela_aux int
+);
+
+/* TABELA DE TABELA DE PREÇO AUXILIAR*/
+CREATE TABLE priceTableAux(
+    id_tabela_preco_aux int not null primary key auto_increment,
+    nome varchar(100),
+    periodo int,
+    valor float,
+    valorPerda float,
+    tolerancia int
 );
 
 /* TABELA DE USUÁRIOS DO SISTEMA */
@@ -29,8 +48,38 @@ CREATE TABLE users(
     nivel_acesso varchar(100)
 );
 
+/* TABELA DE USUÁRIOS DO SISTEMA */
+CREATE TABLE courtyard(
+    id_patio int not null primary key auto_increment,
+    nome varchar(100),
+    qtd int,
+    tabela_preco int
+);
+
+/* TABELA DE TERMINAIS DO SISTEMA */
+CREATE TABLE terminal(
+    id_terminal int not null primary key auto_increment,
+    descricao varchar(100),
+    ip varchar(16),
+    patio int,
+    funcao int,
+    ip_cancela varchar(16)
+);
+
 /* INSERÇÃO DE CONFIGURAÇÃO DA FILIAL DO CLIENTE */
-INSERT INTO configEstacionamento (nome_fantasia,razao_social,endereco,cnpj,inscricao_municipal,telefone,website,email) VALUES ('BASE DE DADOS GRAMATTA','.','.','.','.','.','.','.');
+INSERT INTO configParking (nome_fantasia,razao_social,endereco,cnpj,inscricao_municipal,telefone,website,email) VALUES ('BASE DE DADOS GRAMATTA','.','.','.','.','.','.','.');
 
 /* INSERÇÃO DE USUÁRIO LINK */
 INSERT INTO users (nome,cargo,user_login,user_senha,nivel_acesso) VALUES ('Link Nordeste','Desenvolvedores','link','ti159753','LINK');
+
+/* INSERÇÃO DE PÁTIO PADRÃO */
+INSERT INTO courtyard (nome,qtd,tabela_preco) VALUES ('Pátio Link',5000,1);
+
+/* INSERÇÃO DE TABELA DE PREÇO PADRÃO */
+INSERT INTO priceTable (nome,periodo,valor,tabela_aux) VALUES ('Tabela de Preço Principal',60,8.00,1);
+
+/* INSERÇÃO DE TABELA DE PREÇO AUXILIAR */
+INSERT INTO priceTableAux (nome,periodo,valor,valorPerda,tolerancia) VALUES ('Tabela de Preço Auxiliar',60,1.00,20.00,10);
+
+/* INSERÇÃO DE TERMINAL PADRÃO */
+INSERT INTO terminal (descricao,ip,patio,funcao,ip_cancela) VALUES ('Terminal de Entrada','192.168.0.2',1,2,'192.168.0.100');

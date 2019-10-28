@@ -5,7 +5,7 @@ module.exports.user = function (application, req, res) {
     var connection = application.config.dbConnection();
     var userModel = new application.app.models.UserDAO(connection);
 
-    var id_user = req.query;
+    var id_user = req.params.id;
 
     userModel.getUser(id_user, function (error, result) {
         res.json(result[0]);
@@ -29,14 +29,12 @@ module.exports.insertUser = function (application, req, res) {
     var connection = application.config.dbConnection();
     var userModel = new application.app.models.UserDAO(connection);
 
-    var user = req.query;
+    var user = req.body;
 
     userModel.insertUser(user, function (error, resultDB) {
-
         userModel.getUser(resultDB.insertId, function (error, result) {
             res.json(result[0]);
         });
-
     });
 
 }
@@ -46,11 +44,13 @@ module.exports.updateUser = function (application, req, res) {
     var connection = application.config.dbConnection();
     var userModel = new application.app.models.UserDAO(connection);
 
-    //var user = req.query;
-    var user = { "id_user": "30", "nome": "ThamyGretchen2018", "cargo": "ThamyX", "user_login": "thamy2019", "user_senha": "ti159753", "nivel_acesso": "LINK" }
+    var id_user = req.params.id;
+    var user = req.query;
 
-    userModel.updateUser(user, function (error, result) {
-        res.json(result);
+    userModel.updateUser(user, id_user, function (error, resultDB) {
+        userModel.getUser(id_user, function (error, result) {
+            res.json(result[0]);
+        });
     });
 
 }
@@ -60,7 +60,7 @@ module.exports.deleteUser = function (application, req, res) {
     var connection = application.config.dbConnection();
     var userModel = new application.app.models.UserDAO(connection);
 
-    var id_user = req.query;
+    var id_user = req.params.id;
 
     userModel.deleteUser(id_user, function (error, result) {
         res.json(result);

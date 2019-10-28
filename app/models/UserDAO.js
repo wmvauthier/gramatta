@@ -31,7 +31,7 @@ UserDAO.prototype.insertUser = function (user, callback) {
     this._connection.query(sql, data, callback);
 };
 
-UserDAO.prototype.updateUser = function (user, callback) {
+UserDAO.prototype.updateUser = function (user, id_user, callback) {
     let sql = `UPDATE users SET
     nome = ? ,
     cargo = ? ,
@@ -45,14 +45,14 @@ UserDAO.prototype.updateUser = function (user, callback) {
     user.user_login,
     user.user_senha,
     user.nivel_acesso,
-    user.id_user];
+        id_user];
 
     this._connection.query(sql, data, callback);
 };
 
-UserDAO.prototype.deleteUser = function (id, callback) {
+UserDAO.prototype.deleteUser = function (id_user, callback) {
     let sql = `DELETE FROM users WHERE id_user = ?`;
-    let data = [id];
+    let data = [id_user];
     this._connection.query(sql, data, callback);
 };
 
