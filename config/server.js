@@ -8,6 +8,17 @@ var express = require('express')
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//Permite a Requisição através de Scripts Externos
+app.use(function(req, res, next){
+
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+	res.setHeader("Access-Control-Allow-Headers", "content-type");
+	res.setHeader("Access-Control-Allow-Credentials", true);
+
+	next();
+});
+
 //Um middleware 'express-validator' para validar campos
 //var expressValidator = require('express-validator');
 //app.use(expressValidator());
