@@ -1,7 +1,5 @@
 module.exports = function (application) {
 
-    //Métodos precisarão ser alterados para POST após testes
-
     application.get('/user', function (req, res) {
         application.app.controllers.users.users(application, req, res);
     });

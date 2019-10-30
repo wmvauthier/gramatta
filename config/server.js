@@ -31,7 +31,8 @@ app.use(express.static('./app/public'));
 //Com ele podemos adicionar diversos módulos automaticamente também
 var consign = require('consign');
 consign()
-    .include('app/routes')
+    .include('app/businessFunctions')
+    .then('app/routes')
     .then('app/models')
     .then('app/controllers')
     .then('config/dbConnection.js')

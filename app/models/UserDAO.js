@@ -26,6 +26,7 @@ UserDAO.prototype.insertUser = function (user, callback) {
     user.cargo,
     user.user_login,
     user.user_senha,
+    user.token,
     user.nivel_acesso];
 
     this._connection.query(sql, data, callback);
@@ -38,6 +39,7 @@ UserDAO.prototype.updateUser = function (user, id_user, callback) {
     user_login = ? ,
     user_senha = ? ,
     nivel_acesso = ?
+    token = ?
     WHERE id_user = ?`;
 
     let data = [user.nome,
@@ -45,6 +47,7 @@ UserDAO.prototype.updateUser = function (user, id_user, callback) {
     user.user_login,
     user.user_senha,
     user.nivel_acesso,
+    user.token,
         id_user];
 
     this._connection.query(sql, data, callback);

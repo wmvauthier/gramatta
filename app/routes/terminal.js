@@ -1,7 +1,5 @@
 module.exports = function (application) {
 
-    //Métodos precisarão ser alterados para POST após testes
-
     application.get('/terminal', function (req, res) {
         application.app.controllers.terminal.terminals(application, req, res);
     });

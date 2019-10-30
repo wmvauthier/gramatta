@@ -1,7 +1,5 @@
 module.exports = function (application) {
 
-    //Métodos precisarão ser alterados para POST após testes
-
     application.get('/courtyard', function (req, res) {
         application.app.controllers.courtyard.courtyards(application, req, res);
     });

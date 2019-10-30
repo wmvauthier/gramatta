@@ -1,7 +1,5 @@
 module.exports = function (application) {
 
-    //Métodos precisarão ser alterados para POST após testes
-
     application.get('/priceTableAux', function (req, res) {
         application.app.controllers.priceTableAux.priceTableAuxs(application, req, res);
     });
