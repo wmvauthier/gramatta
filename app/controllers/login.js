@@ -2,27 +2,26 @@ module.exports.login = function (application, req, res) {
 
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
-    var businessFunctions = application.app.businessFunctions.login;
-    console.log(businessFunctions.token());
+    var businessFunctions = application.app.businessFunctions.authentication;
 
-    var connection = application.config.dbConnection();
-    var documentModel = new application.app.models.DocumentDAO(connection);
+    var user = req.query;
 
-    var id_document = req.params.id;
+    var check = businessFunctions.login(application, user);
 
-    documentModel.getDocument(id_document, function (error, result) {
-        res.json(result[0]);
-    });
+    res.send(check);
 
 }
 
 module.exports.logout = function (application, req, res) {
 
-    var connection = application.config.dbConnection();
-    var documentModel = new application.app.models.DocumentDAO(connection);
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
-    documentModel.getAllDocuments(function (error, result) {
-        res.json(result);
-    });
+    var businessFunctions = application.app.businessFunctions.authentication;
+
+    var user = req.query;
+
+    var check = businessFunctions.logout(application, user);
+
+    res.send(check);
 
 }

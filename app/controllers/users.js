@@ -29,7 +29,7 @@ module.exports.insertUser = function (application, req, res) {
     var connection = application.config.dbConnection();
     var userModel = new application.app.models.UserDAO(connection);
 
-    var user = req.body;
+    var user = req.query;
 
     userModel.insertUser(user, function (error, resultDB) {
         userModel.getUser(resultDB.insertId, function (error, result) {

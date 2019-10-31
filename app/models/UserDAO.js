@@ -14,6 +14,18 @@ UserDAO.prototype.getAllUsers = function (callback) {
     this._connection.query(sql, callback);
 };
 
+UserDAO.prototype.getUserByLogin = function (login, callback) {
+    let sql = `SELECT * FROM users WHERE user_login = ?`;
+    let data = [login];
+    this._connection.query(sql, data, callback);
+};
+
+UserDAO.prototype.setToken = function (id, token, callback) {
+    let sql = `UPDATE users SET token = ? WHERE id_user = ?`;
+    let data = [token, id];
+    this._connection.query(sql, data, callback);
+};
+
 UserDAO.prototype.insertUser = function (user, callback) {
     let sql = `INSERT INTO users SET
     nome = ? ,
