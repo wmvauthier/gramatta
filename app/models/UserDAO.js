@@ -20,6 +20,12 @@ UserDAO.prototype.getUserByLogin = function (login, callback) {
     this._connection.query(sql, data, callback);
 };
 
+UserDAO.prototype.getUserByToken = function (token, callback) {
+    let sql = `SELECT * FROM users WHERE token = ?`;
+    let data = [token];
+    this._connection.query(sql, data, callback);
+};
+
 UserDAO.prototype.setToken = function (id, token, callback) {
     let sql = `UPDATE users SET token = ? WHERE id_user = ?`;
     let data = [token, id];
