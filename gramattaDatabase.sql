@@ -77,7 +77,7 @@ CREATE TABLE document(
     cred int,
     data_entrada timestamp default current_timestamp,
     terminal_entrada varchar(100),
-    data_saida timestamp,
+    data_saida timestamp default current_timestamp,
     terminal_saida varchar(100),
     valor float default 0.0
 );
