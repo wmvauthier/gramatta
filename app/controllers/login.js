@@ -5,7 +5,7 @@ module.exports.login = function (application, req, res) {
     var businessFunctions = application.app.businessFunctions.authentication;
     var genToken = businessFunctions.token();
 
-    var user = req.query;
+    var user = req.body;
     var login = user.user_login;
     var password = user.user_senha;
 
@@ -13,11 +13,13 @@ module.exports.login = function (application, req, res) {
 
         if (resultLogin[0]) {
             if (resultLogin[0].user_senha == password) {
+
                 userModel.setToken(resultLogin[0].id_user, genToken, function (error, resultToken) {
 
                     if (resultToken.affectedRows == 1) {
                         userModel.getUser(resultLogin[0].id_user, function (error, resultUser) {
-                            res.json(resultUser[0]);
+                            console.log(resultUser[0].token);
+                            res.json({'token':resultUser[0].token});
                         });
                     } else {
                         res.json({'msg':'Erro na Geração de Token'});
