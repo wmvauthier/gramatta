@@ -18,19 +18,18 @@ module.exports.login = function (application, req, res) {
 
                     if (resultToken.affectedRows == 1) {
                         userModel.getUser(resultLogin[0].id_user, function (error, resultUser) {
-                            console.log(resultUser[0].token);
-                            res.json({'token':resultUser[0].token});
+                            res.json({'user':resultUser[0]});
                         });
                     } else {
-                        res.json({'msg':'Erro na Geração de Token'});
+                        res.json({'msg':'Erro na Geração de Token','hint':'Verifique o Token'});
                     }
 
                 });
             } else {
-                res.json({'msg': businessFunctions.incorrectPassword});
+                res.json({'msg': businessFunctions.incorrectPassword , 'hint': businessFunctions.incorrectPasswordHint});
             }
         } else {
-            res.json({'msg':businessFunctions.notFoundUser});
+            res.json({'msg':businessFunctions.notFoundUser, 'hint': businessFunctions.notFoundUserHint});
         }
 
     });
@@ -39,13 +38,11 @@ module.exports.login = function (application, req, res) {
 
 module.exports.logout = function (application, req, res) {
 
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-
     var connection = application.config.dbConnection();
     var userModel = new application.app.models.UserDAO(connection);
     var businessFunctions = application.app.businessFunctions.authentication;
 
-    var user = req.query;
+    var user = req.body;
     var token = user.token;
 
     if(token){
@@ -55,19 +52,19 @@ module.exports.logout = function (application, req, res) {
                 userModel.setToken(resultUser[0].id_user, null, function (error, resultToken) {
     
                     if (resultToken.affectedRows == 1) {
-                        res.json({'msg':businessFunctions.successfullyLogout});
+                        res.json({'msg':businessFunctions.successfullyLogout, 'hint': businessFunctions.successfullyLogoutHint});
                     } else {
                         res.json({'msg':'Erro na Gravação do Token'});
                     }
     
                 });
             } else {
-                res.json({'msg':businessFunctions.notFoundUser});
+                res.json({'msg':businessFunctions.notFoundUser , 'hint': businessFunctions.notFoundUserHint});
             }
     
         });
     }else{
-        res.json({'msg':businessFunctions.noToken});
+        res.json({'msg':businessFunctions.noToken , 'hint': businessFunctions.noTokenHint});
     }
 
 
