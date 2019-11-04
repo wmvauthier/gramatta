@@ -44,7 +44,6 @@ UserDAO.prototype.insertUser = function (user, callback) {
     user.cargo,
     user.user_login,
     user.user_senha,
-    user.token,
     user.nivel_acesso];
 
     this._connection.query(sql, data, callback);

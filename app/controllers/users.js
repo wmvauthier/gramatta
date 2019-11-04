@@ -1,7 +1,5 @@
 module.exports.user = function (application, req, res) {
 
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-
     var connection = application.config.dbConnection();
     var userModel = new application.app.models.UserDAO(connection);
 
@@ -29,10 +27,11 @@ module.exports.insertUser = function (application, req, res) {
     var connection = application.config.dbConnection();
     var userModel = new application.app.models.UserDAO(connection);
 
-    var user = req.query;
+    var user = req.body;
 
     userModel.insertUser(user, function (error, resultDB) {
         userModel.getUser(resultDB.insertId, function (error, result) {
+            console.log(result);
             res.json(result[0]);
         });
     });
@@ -45,7 +44,7 @@ module.exports.updateUser = function (application, req, res) {
     var userModel = new application.app.models.UserDAO(connection);
 
     var id_user = req.params.id;
-    var user = req.query;
+    var user = req.body;
 
     userModel.updateUser(user, id_user, function (error, resultDB) {
         userModel.getUser(id_user, function (error, result) {
