@@ -1,7 +1,5 @@
 module.exports.courtyard = function (application, req, res) {
 
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-
     var connection = application.config.dbConnection();
     var courtyardModel = new application.app.models.CourtyardDAO(connection);
 
@@ -29,7 +27,7 @@ module.exports.insertCourtyard = function (application, req, res) {
     var connection = application.config.dbConnection();
     var courtyardModel = new application.app.models.CourtyardDAO(connection);
 
-    var courtyard = req.query;
+    var courtyard = req.body;
 
     courtyardModel.insertCourtyard(courtyard, function (error, resultDB) {
         courtyardModel.getCourtyard(resultDB.insertId, function (error, result) {
@@ -45,7 +43,7 @@ module.exports.updateCourtyard = function (application, req, res) {
     var courtyardModel = new application.app.models.CourtyardDAO(connection);
 
     var id_courtyard = req.params.id;
-    var courtyard = req.query;
+    var courtyard = req.body;
 
     courtyardModel.updateCourtyard(courtyard, id_courtyard, function (error, resultDB) {
         courtyardModel.getCourtyard(id_courtyard, function (error, result) {

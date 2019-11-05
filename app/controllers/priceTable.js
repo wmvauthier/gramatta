@@ -1,7 +1,5 @@
 module.exports.priceTable = function (application, req, res) {
 
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-
     var connection = application.config.dbConnection();
     var priceTableModel = new application.app.models.PriceTableDAO(connection);
 
@@ -29,7 +27,7 @@ module.exports.insertPriceTable = function (application, req, res) {
     var connection = application.config.dbConnection();
     var priceTableModel = new application.app.models.PriceTableDAO(connection);
 
-    var priceTable = req.query;
+    var priceTable = req.body;
 
     priceTableModel.insertPriceTable(priceTable, function (error, resultDB) {
         priceTableModel.getPriceTable(resultDB.insertId, function (error, result) {
@@ -45,7 +43,7 @@ module.exports.updatePriceTable = function (application, req, res) {
     var priceTableModel = new application.app.models.PriceTableDAO(connection);
 
     var id_priceTable = req.params.id;
-    var priceTable = req.query;
+    var priceTable = req.body;
 
     priceTableModel.updatePriceTable(priceTable, id_priceTable, function (error, resultDB) {
         priceTableModel.getPriceTable(id_priceTable, function (error, result) {

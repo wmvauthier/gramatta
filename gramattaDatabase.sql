@@ -54,7 +54,7 @@ CREATE TABLE courtyard(
     id_patio int not null primary key auto_increment,
     nome varchar(100),
     qtd int,
-    tabela_preco int
+    tabela_preco varchar(100)
 );
 
 /* TABELA DE TERMINAIS DO SISTEMA */

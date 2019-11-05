@@ -35,7 +35,6 @@ PriceTableDAO.prototype.updatePriceTable = function (priceTable, id_priceTable, 
     WHERE id_tabela_preco = ?`;
 
     let data = [priceTable.nome, priceTable.periodo, priceTable.valor, priceTable.tabela_aux, id_priceTable];
-
     this._connection.query(sql, data, callback);
 };
 
