@@ -31,7 +31,6 @@ module.exports.insertUser = function (application, req, res) {
 
     userModel.insertUser(user, function (error, resultDB) {
         userModel.getUser(resultDB.insertId, function (error, result) {
-            console.log(result);
             res.json(result[0]);
         });
     });

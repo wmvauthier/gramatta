@@ -55,7 +55,7 @@ UserDAO.prototype.updateUser = function (user, id_user, callback) {
     cargo = ? ,
     user_login = ? ,
     user_senha = ? ,
-    nivel_acesso = ?
+    nivel_acesso = ? ,
     token = ?
     WHERE id_user = ?`;
 
