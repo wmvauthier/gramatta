@@ -49,7 +49,14 @@ CREATE TABLE users(
     token varchar(11)
 );
 
-/* TABELA DE USUÁRIOS DO SISTEMA */
+/* TABELA DE AFILIADOS DO SISTEMA */
+CREATE TABLE affiliate(
+    id_afiliado int not null primary key auto_increment,
+    nome varchar(100),
+    cnpj varchar(18)
+);
+
+/* TABELA DE PÁTIOS DO SISTEMA */
 CREATE TABLE courtyard(
     id_patio int not null primary key auto_increment,
     nome varchar(100),
@@ -90,6 +97,9 @@ INSERT INTO users (nome,cargo,user_login,user_senha,nivel_acesso,token) VALUES (
 
 /* INSERÇÃO DE PÁTIO PADRÃO */
 INSERT INTO courtyard (nome,qtd,tabela_preco) VALUES ('Pátio Link',5000,1);
+
+/* INSERÇÃO DE AFILIADOS PADRÃO */
+INSERT INTO affiliate (nome,cnpj) VALUES ('Conveniência LTDA',"12.215.056/0001-42");
 
 /* INSERÇÃO DE TABELA DE PREÇO PADRÃO */
 INSERT INTO priceTable (nome,periodo,valor,tabela_aux) VALUES ('Tabela de Preço Principal',60,8.00,1);
