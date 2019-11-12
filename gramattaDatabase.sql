@@ -61,6 +61,8 @@ CREATE TABLE courtyard(
     id_patio int not null primary key auto_increment,
     nome varchar(100),
     qtd int,
+    onCourtyard int,
+    outCourtyard int,
     tabela_preco varchar(100)
 );
 
@@ -79,7 +81,6 @@ CREATE TABLE document(
     id_document int not null primary key auto_increment,
     document_type varchar(3),
     nfce varchar(44),
-    documentNumber varchar(100),
     ticket varchar(16),
     cartao int,
     placa varchar(7),
@@ -98,7 +99,7 @@ INSERT INTO configParking (nome_fantasia,razao_social,endereco,cnpj,inscricao_mu
 INSERT INTO users (nome,cargo,user_login,user_senha,nivel_acesso,token) VALUES ('Link Nordeste','Desenvolvedores','link','ti159753','LINK','51rwtbfsyza');
 
 /* INSERÇÃO DE PÁTIO PADRÃO */
-INSERT INTO courtyard (nome,qtd,tabela_preco) VALUES ('Pátio Link',5000,1);
+INSERT INTO courtyard (nome,qtd,onCourtyard,outCourtyard,tabela_preco) VALUES ('Pátio Link',10000,4599,5401,1);
 
 /* INSERÇÃO DE AFILIADOS PADRÃO */
 INSERT INTO affiliate (nome,cnpj) VALUES ('Conveniência LTDA',"12.215.056/0001-42");
@@ -113,5 +114,5 @@ INSERT INTO priceTableAux (nome,periodo,valor,valorPerda,tolerancia) VALUES ('Ta
 INSERT INTO terminal (descricao,ip,patio,funcao,ip_cancela) VALUES ('Terminal de Entrada','192.168.0.2',1,2,'192.168.0.100');
 
 /* INSERÇÃO DE DOCUMENTO PADRÃO */
-INSERT INTO document (document_type,nfce,documentNumber,ticket,cartao,placa,cred,data_entrada,terminal_entrada,data_saida,terminal_saida,valor) 
-VALUES ('AFF','26191008118879000182650010000693271005117969','191030102654','0000000000000001',965235,'KKJ3120',3,null,'EN01',null,null,0.0);
+INSERT INTO document (document_type,nfce,ticket,cartao,placa,cred,data_entrada,terminal_entrada,data_saida,terminal_saida,valor) 
+VALUES ('AFF','26191008118879000182650010000693271005117969','0000000000000001',965235,'KKJ3120',3,null,'EN01',null,null,0.0);

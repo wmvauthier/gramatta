@@ -8,6 +8,10 @@ module.exports = function (application) {
         application.app.controllers.document.document(application, req, res);
     });
 
+    application.get('/document_Affiliates', function (req, res) {
+        application.app.controllers.document.affiliates(application, req, res);
+    });
+
     application.post('/document', function (req, res) {
         application.app.controllers.document.insertDocument(application, req, res);
     });
