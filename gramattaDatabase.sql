@@ -1,4 +1,4 @@
-DROP DATABASE gramatta;
+﻿DROP DATABASE gramatta;
 
 /* CRIAÇÃO DO BANCO DE DADOS */
 CREATE DATABASE gramatta;
@@ -77,6 +77,8 @@ CREATE TABLE terminal(
 /* TABELA DE DOCUMENTOS DO SISTEMA */
 CREATE TABLE document(
     id_document int not null primary key auto_increment,
+    document_type varchar(3),
+    nfce varchar(44),
     documentNumber varchar(100),
     ticket varchar(16),
     cartao int,
@@ -111,5 +113,5 @@ INSERT INTO priceTableAux (nome,periodo,valor,valorPerda,tolerancia) VALUES ('Ta
 INSERT INTO terminal (descricao,ip,patio,funcao,ip_cancela) VALUES ('Terminal de Entrada','192.168.0.2',1,2,'192.168.0.100');
 
 /* INSERÇÃO DE DOCUMENTO PADRÃO */
-INSERT INTO document (documentNumber,ticket,cartao,placa,cred,data_entrada,terminal_entrada,data_saida,terminal_saida,valor) 
-VALUES ('191030102654','0000000001',965235,'KKJ3120',3,null,'EN01',null,null,0.0);
+INSERT INTO document (document_type,nfce,documentNumber,ticket,cartao,placa,cred,data_entrada,terminal_entrada,data_saida,terminal_saida,valor) 
+VALUES ('AFF','26191008118879000182650010000693271005117969','191030102654','0000000000000001',965235,'KKJ3120',3,null,'EN01',null,null,0.0);
