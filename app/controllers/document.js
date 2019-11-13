@@ -33,6 +33,39 @@ module.exports.affiliates = function (application, req, res) {
 
 }
 
+module.exports.horists = function (application, req, res) {
+
+    var connection = application.config.dbConnection();
+    var documentModel = new application.app.models.DocumentDAO(connection);
+
+    documentModel.getAllHoristsDocuments(function (error, result) {
+        res.json(result);
+    });
+
+}
+
+module.exports.monthly = function (application, req, res) {
+
+    var connection = application.config.dbConnection();
+    var documentModel = new application.app.models.DocumentDAO(connection);
+
+    documentModel.getAllMonthlyDocuments(function (error, result) {
+        res.json(result);
+    });
+
+}
+
+module.exports.authorized = function (application, req, res) {
+
+    var connection = application.config.dbConnection();
+    var documentModel = new application.app.models.DocumentDAO(connection);
+
+    documentModel.getAllAuthorizedDocuments(function (error, result) {
+        res.json(result);
+    });
+
+}
+
 module.exports.insertDocument = function (application, req, res) {
 
     var connection = application.config.dbConnection();

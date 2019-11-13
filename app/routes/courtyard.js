@@ -20,4 +20,8 @@ module.exports = function (application) {
         application.app.controllers.courtyard.deleteCourtyard(application, req, res);
     });
 
+    application.get('/countDocumentsFromCourtyards/:id', function (req, res) {
+        application.app.controllers.courtyard.countDocumentsFromCourtyards(application, req, res);
+    });
+    
 }

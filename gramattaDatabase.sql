@@ -61,7 +61,7 @@ CREATE TABLE courtyard(
     id_patio int not null primary key auto_increment,
     nome varchar(100),
     qtd int,
-    onCourtyard int,
+    onCourtyard int default 0,
     outCourtyard int,
     tabela_preco varchar(100)
 );
@@ -89,6 +89,8 @@ CREATE TABLE document(
     terminal_entrada varchar(100),
     data_saida timestamp default current_timestamp,
     terminal_saida varchar(100),
+    patio int,
+    docStatus varchar(16),
     valor float default 0.0
 );
 
@@ -114,5 +116,5 @@ INSERT INTO priceTableAux (nome,periodo,valor,valorPerda,tolerancia) VALUES ('Ta
 INSERT INTO terminal (descricao,ip,patio,funcao,ip_cancela) VALUES ('Terminal de Entrada','192.168.0.2',1,2,'192.168.0.100');
 
 /* INSERÇÃO DE DOCUMENTO PADRÃO */
-INSERT INTO document (document_type,nfce,ticket,cartao,placa,cred,data_entrada,terminal_entrada,data_saida,terminal_saida,valor) 
-VALUES ('AFF','26191008118879000182650010000693271005117969','0000000000000001',965235,'KKJ3120',3,null,'EN01',null,null,0.0);
+INSERT INTO document (document_type,nfce,ticket,cartao,placa,cred,data_entrada,terminal_entrada,data_saida,terminal_saida,patio,docStatus,valor) 
+VALUES ('AFF','26191008118879000182650010000693271005117969','0000000000000001',965235,'KKJ3120',3,null,'EN01',null,null,1,"true",0.0);

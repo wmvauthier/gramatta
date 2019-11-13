@@ -19,6 +19,51 @@ DocumentDAO.prototype.getAllAffiliateDocuments = function (callback) {
     this._connection.query(sql, callback);
 };
 
+DocumentDAO.prototype.getAllHoristsDocuments = function (callback) {
+    let sql = `SELECT * FROM document where document_type = "HOR"`;
+    this._connection.query(sql, callback);
+};
+
+DocumentDAO.prototype.getAllMonthlyDocuments = function (callback) {
+    let sql = `SELECT * FROM document where document_type = "MEN"`;
+    this._connection.query(sql, callback);
+};
+
+DocumentDAO.prototype.getAllAuthorizedDocuments = function (callback) {
+    let sql = `SELECT * FROM document where document_type = "AUT"`;
+    this._connection.query(sql, callback);
+};
+
+DocumentDAO.prototype.getAllOnCourtyardDocumentsFromCourtyard = function (id_patio,callback) {
+    let sql = `SELECT * FROM document where patio = ? and docStatus = "true"`;
+    let data = [id_patio];
+    this._connection.query(sql, data,callback);
+};
+
+DocumentDAO.prototype.getAllOnCourtyardAffiliateDocumentsFromCourtyard = function (id_patio,callback) {
+    let sql = `SELECT * FROM document where document_type = "AFF" and patio = ? and docStatus = "true"`;
+    let data = [id_patio];
+    this._connection.query(sql, data,callback);
+};
+
+DocumentDAO.prototype.getAllOnCourtyardHoristsDocumentsFromCourtyard = function (id_patio,callback) {
+    let sql = `SELECT * FROM document where document_type = "HOR" and patio = ? and docStatus = "true"`;
+    let data = [id_patio];
+    this._connection.query(sql, data,callback);
+};
+
+DocumentDAO.prototype.getAllOnCourtyardMonthlyDocumentsFromCourtyard = function (id_patio,callback) {
+    let sql = `SELECT * FROM document where document_type = "MEN" and patio = ? and docStatus = "true"`;
+    let data = [id_patio];
+    this._connection.query(sql, data,callback);
+};
+
+DocumentDAO.prototype.getAllOnCourtyardAuthorizedDocumentsFromCourtyard = function (id_patio,callback) {
+    let sql = `SELECT * FROM document where document_type = "AUT" and patio = ? and docStatus = "true"`;
+    let data = [id_patio];
+    this._connection.query(sql, data,callback);
+};
+
 DocumentDAO.prototype.insertDocument = function (document, callback) {
 
     let sql = "";
