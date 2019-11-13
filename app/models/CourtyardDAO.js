@@ -18,9 +18,11 @@ CourtyardDAO.prototype.insertCourtyard = function (courtyard, callback) {
     let sql = `INSERT INTO courtyard SET
     nome = ? ,
     qtd = ?,
+    onCourtyard = 0,
+    outCourtyard = ?,
     tabela_preco = ?`;
 
-    let data = [courtyard.nome, courtyard.qtd, courtyard.tabela_preco];
+    let data = [courtyard.nome, courtyard.qtd, courtyard.outCourtyard, courtyard.tabela_preco];
 
     this._connection.query(sql, data, callback);
 };
@@ -33,6 +35,17 @@ CourtyardDAO.prototype.updateCourtyard = function (courtyard, id_courtyard, call
     WHERE id_patio = ?`;
 
     let data = [courtyard.nome, courtyard.qtd, courtyard.tabela_preco, id_courtyard];
+
+    this._connection.query(sql, data, callback);
+};
+
+CourtyardDAO.prototype.updateCountCourtyard = function (onCourtyard, outCourtyard, id_courtyard, callback) {
+    let sql = `UPDATE courtyard SET
+    onCourtyard = ? ,
+    outCourtyard = ?
+    WHERE id_patio = ?`;
+
+    let data = [onCourtyard, outCourtyard, id_courtyard];
 
     this._connection.query(sql, data, callback);
 };
