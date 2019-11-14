@@ -80,6 +80,7 @@ DocumentDAO.prototype.insertDocument = function (document, callback) {
         terminal_entrada = ?,
         data_entrada = ?,
         terminal_saida = ?,
+        docStatus = "false",
         valor = ?`;
 
         data = [document.document_type,
@@ -105,6 +106,7 @@ DocumentDAO.prototype.insertDocument = function (document, callback) {
         data_entrada = ?,
         data_saida = ?,
         terminal_saida = ?,
+        docStatus = "true",
         valor = ?`;
 
         data = [document.document_type,
