@@ -1,7 +1,5 @@
 module.exports.terminal = function (application, req, res) {
 
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-
     var connection = application.config.dbConnection();
     var terminalModel = new application.app.models.TerminalDAO(connection);
 
@@ -29,7 +27,7 @@ module.exports.insertTerminal = function (application, req, res) {
     var connection = application.config.dbConnection();
     var terminalModel = new application.app.models.TerminalDAO(connection);
 
-    var terminal = req.query;
+    var terminal = req.body;
 
     terminalModel.insertTerminal(terminal, function (error, resultDB) {
         terminalModel.getTerminal(resultDB.insertId, function (error, result) {
@@ -45,7 +43,7 @@ module.exports.updateTerminal = function (application, req, res) {
     var terminalModel = new application.app.models.TerminalDAO(connection);
 
     var id_terminal = req.params.id;
-    var terminal = req.query;
+    var terminal = req.body;
 
     terminalModel.updateTerminal(terminal, id_terminal, function (error, resultDB) {
         terminalModel.getTerminal(id_terminal, function (error, result) {
