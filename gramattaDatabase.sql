@@ -95,25 +95,33 @@ CREATE TABLE document(
 );
 
 /* INSERÇÃO DE CONFIGURAÇÃO DA FILIAL DO CLIENTE */
-INSERT INTO configParking (nome_fantasia,razao_social,endereco,cnpj,inscricao_municipal,telefone,website,email) VALUES ('BASE DE DADOS GRAMATTA','.','.','.','.','.','.','.');
+INSERT INTO configParking (nome_fantasia,razao_social,endereco,cnpj,inscricao_municipal,telefone,website,email) VALUES 
+('BASE DE DADOS GRAMATTA','.','.','.','.','.','.','.');
 
 /* INSERÇÃO DE USUÁRIO LINK */
-INSERT INTO users (nome,cargo,user_login,user_senha,nivel_acesso,token) VALUES ('Link Nordeste','Desenvolvedores','link','ti159753','LINK','51rwtbfsyza');
+INSERT INTO users (nome,cargo,user_login,user_senha,nivel_acesso,token) VALUES 
+('Link Nordeste','Desenvolvedores','link','ti159753','LINK','51rwtbfsyza');
 
 /* INSERÇÃO DE PÁTIO PADRÃO */
-INSERT INTO courtyard (nome,qtd,onCourtyard,outCourtyard,tabela_preco) VALUES ('Pátio Link',5,0,5,1);
+INSERT INTO courtyard (nome,qtd,onCourtyard,outCourtyard,tabela_preco) VALUES 
+('Pátio Link 01',5,0,5,1),
+('Pátio Link 02',5,0,5,1);
 
 /* INSERÇÃO DE AFILIADOS PADRÃO */
-INSERT INTO affiliate (nome,cnpj) VALUES ('Conveniência LTDA',"12.215.056/0001-42");
+INSERT INTO affiliate (nome,cnpj) VALUES 
+('Conveniência LTDA',"12.215.056/0001-42");
 
 /* INSERÇÃO DE TABELA DE PREÇO PADRÃO */
-INSERT INTO priceTable (nome,periodo,valor,tabela_aux) VALUES ('Tabela de Preço Principal',60,8.00,1);
+INSERT INTO priceTable (nome,periodo,valor,tabela_aux) VALUES 
+('Tabela de Preço Principal',60,8.00,1);
 
 /* INSERÇÃO DE TABELA DE PREÇO AUXILIAR */
-INSERT INTO priceTableAux (nome,periodo,valor,valorPerda,tolerancia) VALUES ('Tabela de Preço Auxiliar',60,1.00,20.00,10);
+INSERT INTO priceTableAux (nome,periodo,valor,valorPerda,tolerancia) VALUES 
+('Tabela de Preço Auxiliar',60,1.00,20.00,10);
 
 /* INSERÇÃO DE TERMINAL PADRÃO */
-INSERT INTO terminal (descricao,ip,patio,funcao,ip_cancela) VALUES ('Terminal de Entrada','192.168.0.2',1,2,'192.168.0.100');
+INSERT INTO terminal (descricao,ip,patio,funcao,ip_cancela) VALUES 
+('Terminal de Entrada','192.168.0.2',1,2,'192.168.0.100');
 
 /* INSERÇÃO DE DOCUMENTO PADRÃO */
 INSERT INTO document (document_type,nfce,ticket,cartao,placa,cred,data_entrada,terminal_entrada,data_saida,terminal_saida,patio,docStatus,valor) VALUES

@@ -2,10 +2,12 @@ module.exports.courtyard = function (application, req, res) {
 
     var connection = application.config.dbConnection();
     var courtyardModel = new application.app.models.CourtyardDAO(connection);
+    var documentModel = new application.app.models.DocumentDAO(connection);
 
     var id_courtyard = req.params.id;
 
     courtyardModel.getCourtyard(id_courtyard, function (error, result) {
+        updateCountDocuments(application, result);
         res.json(result[0]);
     });
 
@@ -17,7 +19,42 @@ module.exports.courtyards = function (application, req, res) {
     var courtyardModel = new application.app.models.CourtyardDAO(connection);
 
     courtyardModel.getAllCourtyards(function (error, result) {
-        res.json(result);
+
+        updateCountDocuments(application, result);
+
+        courtyardModel.getAllCourtyards(function (error, resultFinal) {
+            console.log(resultFinal);
+            res.json(resultFinal);
+        });
+
+    });
+
+}
+
+function updateCountDocuments(application, courtyards) {
+
+    courtyards.forEach(element => {
+
+        var connection = application.config.dbConnection();
+        var courtyardModel = new application.app.models.CourtyardDAO(connection);
+        var documentModel = new application.app.models.DocumentDAO(connection);
+
+        var id_courtyard = element.id_patio;
+
+        courtyardModel.getCourtyard(id_courtyard, function (error, resultCourtyard) {
+            documentModel.getAllOnCourtyardDocumentsFromCourtyard(id_courtyard, function (error, resultDoc) {
+
+                var onCourtyard = resultDoc.length;
+                var outCourtyard = resultCourtyard[0].qtd - resultDoc.length;
+
+                courtyardModel.updateCountCourtyard(onCourtyard, outCourtyard, id_courtyard, function (error, resultCount) {
+                    courtyardModel.getCourtyard(id_courtyard, function (error, result) {
+
+                    });
+                });
+            });
+        });
+
     });
 
 }
