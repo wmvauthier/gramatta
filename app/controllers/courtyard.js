@@ -2,7 +2,6 @@ module.exports.courtyard = function (application, req, res) {
 
     var connection = application.config.dbConnection();
     var courtyardModel = new application.app.models.CourtyardDAO(connection);
-    var documentModel = new application.app.models.DocumentDAO(connection);
 
     var id_courtyard = req.params.id;
 
@@ -23,7 +22,6 @@ module.exports.courtyards = function (application, req, res) {
         updateCountDocuments(application, result);
 
         courtyardModel.getAllCourtyards(function (error, resultFinal) {
-            console.log(resultFinal);
             res.json(resultFinal);
         });
 
