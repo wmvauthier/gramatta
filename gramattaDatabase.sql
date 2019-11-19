@@ -25,7 +25,7 @@ CREATE TABLE priceTable(
     nome varchar(100),
     periodo int,
     valor float,
-    tabela_aux int
+    tabela_aux varchar(100)
 );
 
 /* TABELA DE TABELA DE PREÇO AUXILIAR*/
