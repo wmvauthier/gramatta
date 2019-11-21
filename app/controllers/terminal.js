@@ -6,7 +6,12 @@ module.exports.terminal = function (application, req, res) {
     var id_terminal = req.params.id;
 
     terminalModel.getTerminal(id_terminal, function (error, result) {
-        res.json(result[0]);
+        if(result){
+            res.json(result[0]);
+        }
+        else{
+            res.json({'error': error});
+        }
     });
 
 }
@@ -17,7 +22,12 @@ module.exports.terminals = function (application, req, res) {
     var terminalModel = new application.app.models.TerminalDAO(connection);
 
     terminalModel.getAllTerminals(function (error, result) {
-        res.json(result);
+        if(result){
+            res.json(result);
+        }
+        else{
+            res.json({'error': error});
+        }
     });
 
 }
@@ -29,10 +39,21 @@ module.exports.insertTerminal = function (application, req, res) {
 
     var terminal = req.body;
 
-    terminalModel.insertTerminal(terminal, function (error, resultDB) {
-        terminalModel.getTerminal(resultDB.insertId, function (error, result) {
-            res.json(result[0]);
-        });
+    terminalModel.insertTerminal(terminal, function (errorDB, resultDB) {
+
+        if(resultDB.insertId){
+            terminalModel.getTerminal(resultDB.insertId, function (error, result) {
+                if(result){
+                    res.json(result[0]);
+                }
+                else{
+                    res.json({'error': error});
+                }
+            });
+        }else{
+            res.json({'error': errorDB});
+        }
+
     });
 
 }
@@ -47,7 +68,12 @@ module.exports.updateTerminal = function (application, req, res) {
 
     terminalModel.updateTerminal(terminal, id_terminal, function (error, resultDB) {
         terminalModel.getTerminal(id_terminal, function (error, result) {
-            res.json(result[0]);
+            if(result){
+                res.json(result[0]);
+            }
+            else{
+                res.json({'error': error});
+            }
         });
     });
 
@@ -61,7 +87,12 @@ module.exports.deleteTerminal = function (application, req, res) {
     var id_terminal = req.params.id;
 
     terminalModel.deleteTerminal(id_terminal, function (error, result) {
-        res.json(result);
+        if(result){
+            res.json(result);
+        }
+        else{
+            res.json({'error': error});
+        }
     });
 
 }

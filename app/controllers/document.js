@@ -6,7 +6,12 @@ module.exports.document = function (application, req, res) {
     var id_document = req.params.id;
 
     documentModel.getDocument(id_document, function (error, result) {
-        res.json(result[0]);
+        if(result){
+            res.json(result[0]);
+        }
+        else{
+            res.json({'error': error});
+        }
     });
 
 }
@@ -17,7 +22,12 @@ module.exports.documents = function (application, req, res) {
     var documentModel = new application.app.models.DocumentDAO(connection);
 
     documentModel.getAllDocuments(function (error, result) {
-        res.json(result);
+        if(result){
+            res.json(result);
+        }
+        else{
+            res.json({'error': error});
+        }
     });
 
 }
@@ -73,10 +83,21 @@ module.exports.insertDocument = function (application, req, res) {
 
     var document = req.body;
 
-    documentModel.insertDocument(document, function (error, resultDB) {
-        documentModel.getDocument(resultDB.insertId, function (error, result) {
-            res.json(result[0]);
-        });
+    documentModel.insertDocument(document, function (errorDB, resultDB) {
+
+        if(resultDB.insertId){
+            documentModel.getDocument(resultDB.insertId, function (error, result) {
+                if(result){
+                    res.json(result[0]);
+                }
+                else{
+                    res.json({'error': error});
+                }
+            });    
+        }else{
+            res.json({'error': errorDB});
+        }
+
     });
 
 }
@@ -91,7 +112,12 @@ module.exports.updateDocument = function (application, req, res) {
 
     documentModel.updateDocument(document, id_document, function (error, resultDB) {
         documentModel.getDocument(id_document, function (error, result) {
-            res.json(result[0]);
+            if(result){
+                res.json(result[0]);
+            }
+            else{
+                res.json({'error': error});
+            }
         });
     });
 
@@ -105,7 +131,12 @@ module.exports.deleteDocument = function (application, req, res) {
     var id_document = req.params.id;
 
     documentModel.deleteDocument(id_document, function (error, result) {
-        res.json(result);
+        if(result){
+            res.json(result);
+        }
+        else{
+            res.json({'error': error});
+        }
     });
 
 }

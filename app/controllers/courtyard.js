@@ -7,7 +7,12 @@ module.exports.courtyard = function (application, req, res) {
 
     courtyardModel.getCourtyard(id_courtyard, function (error, result) {
         updateCountDocuments(application, result);
-        res.json(result[0]);
+        if(result){
+            res.json(result[0]);
+        }
+        else{
+            res.json({'error': error});
+        }
     });
 
 }
@@ -22,7 +27,12 @@ module.exports.courtyards = function (application, req, res) {
         updateCountDocuments(application, result);
 
         courtyardModel.getAllCourtyards(function (error, resultFinal) {
-            res.json(resultFinal);
+            if(resultFinal){
+                res.json(resultFinal);
+            }
+            else{
+                res.json({'error': error});
+            }
         });
 
     });
@@ -110,9 +120,20 @@ module.exports.insertCourtyard = function (application, req, res) {
     courtyard.outCourtyard = courtyard.qtd;
 
     courtyardModel.insertCourtyard(courtyard, function (error, resultDB) {
-        courtyardModel.getCourtyard(resultDB.insertId, function (error, result) {
-            res.json(result[0]);
-        });
+
+        if(resultDB.insertId){
+            courtyardModel.getCourtyard(resultDB.insertId, function (error, result) {
+                if(result){
+                    res.json(result[0]);
+                }
+                else{
+                    res.json({'error': error});
+                }
+            });
+        }else{
+            res.json({'error': errorDB});
+        }
+
     });
 
 }
@@ -127,7 +148,12 @@ module.exports.updateCourtyard = function (application, req, res) {
 
     courtyardModel.updateCourtyard(courtyard, id_courtyard, function (error, resultDB) {
         courtyardModel.getCourtyard(id_courtyard, function (error, result) {
-            res.json(result[0]);
+            if(result){
+                res.json(result[0]);
+            }
+            else{
+                res.json({'error': error});
+            }
         });
     });
 
@@ -141,7 +167,12 @@ module.exports.deleteCourtyard = function (application, req, res) {
     var id_courtyard = req.params.id;
 
     courtyardModel.deleteCourtyard(id_courtyard, function (error, result) {
-        res.json(result);
+        if(result){
+            res.json(result);
+        }
+        else{
+            res.json({'error': error});
+        }
     });
 
 }
