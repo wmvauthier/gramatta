@@ -121,7 +121,7 @@ INSERT INTO priceTableAux (nome,periodo,valor,valorPerda,tolerancia) VALUES
 
 /* INSERÇÃO DE TERMINAL PADRÃO */
 INSERT INTO terminal (descricao,ip,patio,funcao,ip_cancela) VALUES 
-('Terminal de Entrada','192.168.0.2',1,2,'192.168.0.100');
+('Terminal de Entrada','192.168.0.136',1,2,'192.168.0.100');
 
 /* INSERÇÃO DE DOCUMENTO PADRÃO */
 INSERT INTO document (document_type,nfce,ticket,cartao,placa,cred,data_entrada,terminal_entrada,data_saida,terminal_saida,patio,docStatus,valor) VALUES
