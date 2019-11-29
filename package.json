@@ -1,7 +1,7 @@
 {
   "name": "gramatta",
   "version": "1.0.0",
-  "description": "Sistema gramatta",
+  "description": "Módulo Básico para o Sistema Gramatta",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
