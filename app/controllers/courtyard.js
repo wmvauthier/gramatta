@@ -7,11 +7,11 @@ module.exports.courtyard = function (application, req, res) {
 
     courtyardModel.getCourtyard(id_courtyard, function (error, result) {
         updateCountDocuments(application, result);
-        if(result){
+        if (result) {
             res.json(result[0]);
         }
-        else{
-            res.json({'error': error});
+        else {
+            res.json({ 'error': error });
         }
     });
 
@@ -27,11 +27,11 @@ module.exports.courtyards = function (application, req, res) {
         updateCountDocuments(application, result);
 
         courtyardModel.getAllCourtyards(function (error, resultFinal) {
-            if(resultFinal){
+            if (resultFinal) {
                 res.json(resultFinal);
             }
-            else{
-                res.json({'error': error});
+            else {
+                res.json({ 'error': error });
             }
         });
 
@@ -52,14 +52,22 @@ function updateCountDocuments(application, courtyards) {
         courtyardModel.getCourtyard(id_courtyard, function (error, resultCourtyard) {
             documentModel.getAllOnCourtyardDocumentsFromCourtyard(id_courtyard, function (error, resultDoc) {
 
-                var onCourtyard = resultDoc.length;
-                var outCourtyard = resultCourtyard[0].qtd - resultDoc.length;
+                if (resultDoc) {
+                    if (resultCourtyard) {
+                        var onCourtyard = resultDoc.length;
+                        var outCourtyard = resultCourtyard[0].qtd - resultDoc.length;
 
-                courtyardModel.updateCountCourtyard(onCourtyard, outCourtyard, id_courtyard, function (error, resultCount) {
-                    courtyardModel.getCourtyard(id_courtyard, function (error, result) {
+                        courtyardModel.updateCountCourtyard(onCourtyard, outCourtyard, id_courtyard, function (error, resultCount) {
+                            courtyardModel.getCourtyard(id_courtyard, function (error, result) {
 
-                    });
-                });
+                            });
+                        });
+                    }
+                }
+                else {
+                    
+                }
+
             });
         });
 
@@ -121,17 +129,17 @@ module.exports.insertCourtyard = function (application, req, res) {
 
     courtyardModel.insertCourtyard(courtyard, function (error, resultDB) {
 
-        if(resultDB.insertId){
+        if (resultDB.insertId) {
             courtyardModel.getCourtyard(resultDB.insertId, function (error, result) {
-                if(result){
+                if (result) {
                     res.json(result[0]);
                 }
-                else{
-                    res.json({'error': error});
+                else {
+                    res.json({ 'error': error });
                 }
             });
-        }else{
-            res.json({'error': errorDB});
+        } else {
+            res.json({ 'error': errorDB });
         }
 
     });
@@ -148,11 +156,11 @@ module.exports.updateCourtyard = function (application, req, res) {
 
     courtyardModel.updateCourtyard(courtyard, id_courtyard, function (error, resultDB) {
         courtyardModel.getCourtyard(id_courtyard, function (error, result) {
-            if(result){
+            if (result) {
                 res.json(result[0]);
             }
-            else{
-                res.json({'error': error});
+            else {
+                res.json({ 'error': error });
             }
         });
     });
@@ -167,11 +175,11 @@ module.exports.deleteCourtyard = function (application, req, res) {
     var id_courtyard = req.params.id;
 
     courtyardModel.deleteCourtyard(id_courtyard, function (error, result) {
-        if(result){
+        if (result) {
             res.json(result);
         }
-        else{
-            res.json({'error': error});
+        else {
+            res.json({ 'error': error });
         }
     });
 
