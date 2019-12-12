@@ -41,37 +41,36 @@ module.exports.courtyards = function (application, req, res) {
 
 function updateCountDocuments(application, courtyards) {
 
-    courtyards.forEach(element => {
+    if (courtyards) {
+        courtyards.forEach(element => {
 
-        var connection = application.config.dbConnection();
-        var courtyardModel = new application.app.models.CourtyardDAO(connection);
-        var documentModel = new application.app.models.DocumentDAO(connection);
+            var connection = application.config.dbConnection();
+            var courtyardModel = new application.app.models.CourtyardDAO(connection);
+            var documentModel = new application.app.models.DocumentDAO(connection);
 
-        var id_courtyard = element.id_patio;
+            var id_courtyard = element.id_patio;
 
-        courtyardModel.getCourtyard(id_courtyard, function (error, resultCourtyard) {
-            documentModel.getAllOnCourtyardDocumentsFromCourtyard(id_courtyard, function (error, resultDoc) {
+            courtyardModel.getCourtyard(id_courtyard, function (error, resultCourtyard) {
+                documentModel.getAllOnCourtyardDocumentsFromCourtyard(id_courtyard, function (error, resultDoc) {
 
-                if (resultDoc) {
-                    if (resultCourtyard) {
-                        var onCourtyard = resultDoc.length;
-                        var outCourtyard = resultCourtyard[0].qtd - resultDoc.length;
+                    if (resultDoc) {
+                        if (resultCourtyard) {
+                            var onCourtyard = resultDoc.length;
+                            var outCourtyard = resultCourtyard[0].qtd - resultDoc.length;
 
-                        courtyardModel.updateCountCourtyard(onCourtyard, outCourtyard, id_courtyard, function (error, resultCount) {
-                            courtyardModel.getCourtyard(id_courtyard, function (error, result) {
+                            courtyardModel.updateCountCourtyard(onCourtyard, outCourtyard, id_courtyard, function (error, resultCount) {
+                                courtyardModel.getCourtyard(id_courtyard, function (error, result) {
 
+                                });
                             });
-                        });
+                        }
                     }
-                }
-                else {
-                    
-                }
 
+                });
             });
-        });
 
-    });
+        });
+    }
 
 }
 

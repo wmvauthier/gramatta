@@ -8,6 +8,10 @@ module.exports = function (application) {
         application.app.controllers.users.user(application, req, res);
     });
 
+    application.get('/userN/:token', function (req, res) {
+        application.app.controllers.users.userToken(application, req, res);
+    });
+
     application.post('/user', function (req, res) {
         application.app.controllers.users.insertUser(application, req, res);
     });

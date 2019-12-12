@@ -55,8 +55,7 @@ UserDAO.prototype.updateUser = function (user, id_user, callback) {
     cargo = ? ,
     user_login = ? ,
     user_senha = ? ,
-    nivel_acesso = ? ,
-    token = ?
+    nivel_acesso = ? 
     WHERE id_user = ?`;
 
     let data = [user.nome,
@@ -64,7 +63,6 @@ UserDAO.prototype.updateUser = function (user, id_user, callback) {
     user.user_login,
     user.user_senha,
     user.nivel_acesso,
-    user.token,
         id_user];
 
     this._connection.query(sql, data, callback);
