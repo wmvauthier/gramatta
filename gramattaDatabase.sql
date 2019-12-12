@@ -85,9 +85,9 @@ CREATE TABLE document(
     cartao int,
     placa varchar(7),
     cred int,
-    data_entrada timestamp default current_timestamp,
+    data_entrada varchar(30),
     terminal_entrada varchar(100),
-    data_saida timestamp default current_timestamp,
+    data_saida varchar(30),
     terminal_saida varchar(100),
     patio int,
     docStatus varchar(16),
@@ -125,6 +125,13 @@ INSERT INTO terminal (descricao,ip,patio,funcao,ip_cancela) VALUES
 
 /* INSERÇÃO DE DOCUMENTO PADRÃO */
 INSERT INTO document (document_type,nfce,ticket,cartao,placa,cred,data_entrada,terminal_entrada,data_saida,terminal_saida,patio,docStatus,valor) VALUES
-('AFF','26191008118879000182650010000693271005117969',null,null,null,null,null,'EN01',null,null,1,"true",0.0),
-('MEN',null,null,965235,'KKJ3120',3,null,'EN01',null,null,1,"true",0.0),
-('HOR','','0000000000000001',null,null,null,null,'EN01',null,null,1,"true",0.0);
+('AFF','',null,null,null,null,null,'EN01',null,null,1,"true",0.0),
+('AFF','',null,965235,'KKJ3120',3,null,'EN01',null,null,1,"true",0.0),
+('AFF','','0000000000000001',null,null,null,null,'EN01',null,null,1,"true",0.0),
+('AFF','',null,null,null,null,null,'EN01',null,null,1,"true",0.0),
+('AFF','',null,965235,'KKJ3120',3,null,'EN01',null,null,1,"true",0.0),
+('AFF','','0000000000000001',null,null,null,null,'EN01',null,null,1,"true",0.0),
+('AFF','',null,null,null,null,null,'EN01',null,null,1,"true",0.0),
+('AFF','',null,965235,'KKJ3120',3,null,'EN01',null,null,1,"true",0.0),
+('AFF','','0000000000000001',null,null,null,null,'EN01',null,null,1,"true",0.0),
+('AFF','',null,null,null,null,null,'EN01',null,null,1,"true",0.0);

@@ -16,6 +16,18 @@ module.exports = function (application) {
         application.app.controllers.document.insertDocument(application, req, res);
     });
 
+    application.get('/getRandomAFF', function (req, res) {
+        application.app.controllers.document.getRandomAFF(application, req, res);
+    });
+
+    application.post('/insertDocumentAFF', function (req, res) {
+        application.app.controllers.document.insertDocumentAFF(application, req, res);
+    });
+
+    application.post('/exitDocument', function (req, res) {
+        application.app.controllers.document.exitDocument(application, req, res);
+    });
+
     application.put('/document/:id', function (req, res) {
         application.app.controllers.document.updateDocument(application, req, res);
     });
