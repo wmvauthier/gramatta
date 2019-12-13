@@ -88,28 +88,33 @@ module.exports.countDocumentsFromCourtyards = function (application, req, res) {
                 documentModel.getAllOnCourtyardAffiliateDocumentsFromCourtyard(id_courtyard, function (error, resultAffiliates) {
                     courtyardModel.getCourtyard(id_courtyard, function (error, resultCourtyard) {
 
-                        var total = Object.keys(resultAffiliates).length +
-                            Object.keys(resultMonthly).length +
-                            Object.keys(resultHorists).length +
-                            Object.keys(resultAuthorized).length;
+                        if (resultAffiliates) {
+                            var total = Object.keys(resultAffiliates).length +
+                                Object.keys(resultMonthly).length +
+                                Object.keys(resultHorists).length +
+                                Object.keys(resultAuthorized).length;
 
-                        var onCourtyard = total;
-                        var outCourtyard = resultCourtyard[0].qtd - total;
+                            var onCourtyard = total;
+                            var outCourtyard = resultCourtyard[0].qtd - total;
 
-                        courtyardModel.updateCountCourtyard(onCourtyard, outCourtyard, id_courtyard, function (error, resultDB) {
-                            courtyardModel.getCourtyard(id_courtyard, function (error, resultCourtyardFinal) {
+                            courtyardModel.updateCountCourtyard(onCourtyard, outCourtyard, id_courtyard, function (error, resultDB) {
+                                courtyardModel.getCourtyard(id_courtyard, function (error, resultCourtyardFinal) {
 
-                                var counts = (`{"Afiliados" : "${Object.keys(resultAffiliates).length}",
+                                    var counts = (`{"Afiliados" : "${Object.keys(resultAffiliates).length}",
                                 "Mensalistas" : "${Object.keys(resultMonthly).length}",
                                 "Horistas" : "${Object.keys(resultHorists).length}",
                                 "Autorizados" : "${Object.keys(resultAuthorized).length}",
                                 "Disponível" : "${resultCourtyardFinal[0].qtd - total}"
                                 }`);
 
-                                var result = JSON.parse(counts);
-                                res.json(result);
+                                    var result = JSON.parse(counts);
+                                    res.json(result);
+                                });
                             });
-                        });
+                        } else {
+                            res.json({ 'error': error });
+                        }
+
                     });
                 });
             });
