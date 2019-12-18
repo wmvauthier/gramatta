@@ -11,7 +11,7 @@ module.exports.login = function (application, req, res) {
 
     userModel.getUserByLogin(login, function (error, resultLogin) {
 
-        if (resultLogin[0]) {
+        if (resultLogin) {
             if (resultLogin[0].user_senha == password) {
 
                 userModel.setToken(resultLogin[0].id_user, genToken, function (error, resultToken) {
