@@ -8,20 +8,30 @@ var express = require('express')
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//Protege contra DDOS
+var RateLimit = require('express-rate-limit');
+app.enable('trust proxy');
+
+var limiter = new RateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    delayMs: 0
+});
+
+app.use(limiter);
+
 //Permite a Requisição através de Scripts Externos
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
 
-	res.setHeader("Access-Control-Allow-Origin", "*");
-	res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-	res.setHeader("Access-Control-Allow-Headers", "content-type");
-	res.setHeader("Access-Control-Allow-Credentials", true);
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader("Access-Control-Allow-Credentials", true);
 
-	next();
+    next();
 });
 
 //Um middleware 'express-validator' para validar campos
-//var expressValidator = require('express-validator');
-//app.use(expressValidator());
 app.use(expressValidator());
 
 //Um middleware do Express para a inserção de arquivos estáticos HTML, CSS ou JS

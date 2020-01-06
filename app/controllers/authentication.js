@@ -12,28 +12,30 @@ module.exports.login = function (application, req, res) {
     userModel.getUserByLogin(login, function (error, resultLogin) {
 
         if (resultLogin) {
-            if (resultLogin[0].user_senha == password) {
+            if (resultLogin[0]) {
+                if (resultLogin[0].user_senha == password) {
 
-                userModel.setToken(resultLogin[0].id_user, genToken, function (error, resultToken) {
+                    userModel.setToken(resultLogin[0].id_user, genToken, function (error, resultToken) {
 
-                    if (resultToken) {
-                        if (resultToken.affectedRows == 1) {
-                            userModel.getUser(resultLogin[0].id_user, function (error, resultUser) {
-                                res.json({ 'user': resultUser[0] });
-                            });
+                        if (resultToken) {
+                            if (resultToken.affectedRows == 1) {
+                                userModel.getUser(resultLogin[0].id_user, function (error, resultUser) {
+                                    res.json({ 'user': resultUser[0] });
+                                });
+                            } else {
+                                res.json({ 'msg': 'Erro na Geração de Token', 'hint': 'Verifique o Token' });
+                            }
                         } else {
-                            res.json({ 'msg': 'Erro na Geração de Token', 'hint': 'Verifique o Token' });
+                            res.json({ 'error': error });
                         }
-                    } else {
-                        res.json({ 'error': error });
-                    }
 
-                });
+                    });
+                } else {
+                    res.json({ 'msg': businessFunctions.incorrectPassword, 'hint': businessFunctions.incorrectPasswordHint });
+                }
             } else {
-                res.json({ 'msg': businessFunctions.incorrectPassword, 'hint': businessFunctions.incorrectPasswordHint });
+                res.json({ 'msg': businessFunctions.notFoundUser, 'hint': businessFunctions.notFoundUserHint });
             }
-        } else {
-            res.json({ 'msg': businessFunctions.notFoundUser, 'hint': businessFunctions.notFoundUserHint });
         }
 
     });

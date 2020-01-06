@@ -130,7 +130,7 @@ INSERT INTO document (document_type,nfce,ticket,cartao,placa,cred,data_entrada,t
 ('AFF','','',null,null,null,'03/11/2019 15:58:14','EN01',null,null,1,"true",0.0),
 ('AFF','','',null,null,null,'29/11/2019 15:58:14','EN01',null,null,1,"true",0.0),
 ('AFF','','',null,null,null,'11/12/2019 15:58:14','EN01',null,null,1,"true",0.0),
-('AFF','','',null,null,null,'12/12/2019 12:58:14','EN01',null,null,1,"true",0.0),
+('AFF','','',null,null,null,'12/12/2019 12:58:14','EN01','12/12/2019 14:01:14','SA01',1,"true",0.0),
 ('AFF','','',null,null,null,'12/12/2019 13:58:14','EN01',null,null,1,"true",0.0),
 ('AFF','','',null,null,null,'12/12/2019 14:58:14','EN01',null,null,1,"true",0.0),
 ('AFF','','',null,null,null,'12/12/2019 15:58:14','EN01',null,null,1,"true",0.0),
