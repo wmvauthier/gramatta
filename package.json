@@ -21,11 +21,11 @@
   },
   "homepage": "https://github.com/devlinkcne/gramatta#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "cluster": "^0.7.7",
     "consign": "^0.1.6",
     "ejs": "^2.7.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-rate-limit": "^5.0.0",
     "express-validator": "^5.3.1",
     "mysql": "^2.17.1",
